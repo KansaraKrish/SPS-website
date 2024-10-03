@@ -9,9 +9,9 @@ function updateBuild() {
 
     let buildImage = 'images/default-build.jpg'; // Default image
     if (cpu === 'Intel i9') {
-        buildImage = 'images/intel-build.jpg';
+        buildImage = 'images/intel.jpg';
     } else if (cpu === 'AMD Ryzen 9') {
-        buildImage = 'images/amd-build.jpg';
+        buildImage = 'images/amd.jpg';
     }
 
     document.getElementById('build-image').src = buildImage;
