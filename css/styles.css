@@ -24,6 +24,7 @@ p{
     font-weight: bold;
     color: rgb(20, 48, 58);
 }
+
 header {
     background-color: #008080;
     color:white;
@@ -92,7 +93,6 @@ header {
 .navbar ul li .dropdown-content li a:hover {
     background-color: #ddd;
 }
-
 
 main { padding: 20px; }
 
