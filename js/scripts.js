@@ -11,7 +11,7 @@ function updateBuild() {
     if (cpu === 'Intel i9') {
         buildImage = 'images/intel-build.jpg';
     } else if (cpu === 'AMD Ryzen 9') {
-        buildImage = 'images/ryzen-4090.jpg';
+        buildImage = 'images/amd-build.jpg';
     }
 
     document.getElementById('build-image').src = buildImage;
@@ -34,8 +34,4 @@ function saveBuild() {
     localStorage.setItem('customBuild', JSON.stringify(build));
 
     alert('Build saved successfully!');
-}
-
-function demo (){
-    return "hi"
 }

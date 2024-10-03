@@ -14,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
-
 <form method="POST" action="register.php">
     <label>Email:</label>
     <input type="email" name="email" required>
