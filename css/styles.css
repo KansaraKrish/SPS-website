@@ -92,8 +92,6 @@ header {
     background-color: #ddd;
 }
 
-main { padding: 20px; }
-
 .customization { 
     body {
         background-color: #f4f4f4;
@@ -209,6 +207,10 @@ main { padding: 20px; }
     }
     
  }
+
+main { padding: 20px; }
+
+
 
 .options, .live-preview { width: 45%; }
 
