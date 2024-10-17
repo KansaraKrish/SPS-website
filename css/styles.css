@@ -148,8 +148,8 @@ main {
 }
 
 .customization {
-    display: flex;
-    flex-direction: row;
+    display: inline;
+    flex-direction: column;
     width: 100%;
     max-width: 1200px;
     background-color: white;
@@ -185,9 +185,9 @@ main {
 .live-preview {
     width: 35%;
     text-align: center;
-    position: fixed; /* Make the live preview fixed */
-    right: 0;
-    top: 120px;
+    position: fixed;  
+    right: 0;  
+    top: 120px; 
     background-color: white;
     padding: 20px;
     border-radius: 10px;
