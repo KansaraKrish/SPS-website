@@ -52,12 +52,16 @@ header {
     transition: color 0.3s ease, background-color 0.3s ease;
 }
 
+
 /* Hover Effect for Links */
 .navbar ul li a:hover {
     background-color: #008080;
     color: #ffeb3b;
     border-radius: 5px;
 }
+
+
+
 
 /* Dropdown Styling */
 .navbar ul li .dropdown-content {
@@ -235,3 +239,4 @@ footer {
     width: 100%;
 }
 }
+

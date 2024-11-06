@@ -1,37 +1,33 @@
 <?php
-session_start();
+// Database configuration
+require 'db.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $entered_otp = $_POST['otp'];
 
-    if (isset($_SESSION['otp']) && $entered_otp == $_SESSION['otp']) {
-        // If OTP is correct, insert the data into the database
-        $user_data = $_SESSION['user_data'];
+// Retrieve form data
+$name = $_POST['name'];
+$number = $_POST['number'];
+$email = $_POST['email'];
+$password = $_POST['password'];
+$confirm_password = $_POST['confirm_password'];
 
-        // DB connection
-        $conn = new mysqli('localhost', 'root', '', 'your_database');
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
-        $name = $user_data['name'];
-        $number = $user_data['number'];
-        $email = $user_data['email'];
-        $password = $user_data['password'];
-
-        // Insert user details into the database
-        $sql = "INSERT INTO users (name, number, email, password) VALUES ('$name', '$number', '$email', '$password')";
-
-        if ($conn->query($sql) === TRUE) {
-            echo "Registration successful!";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-
-        $conn->close();
-        session_unset();
-        session_destroy();
-    } else {
-        echo "Incorrect OTP!";
-    }
+// Validate if passwords match
+if ($password !== $confirm_password) {
+    echo "Passwords do not match!";
+    exit;
 }
+
+// Hash the password
+$hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
+// Insert data into the database
+$sql = "INSERT INTO users(email, password, phone, name) VALUES ('$email', '$hashed_password', '$number', '$name')";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Registration successful!";
+} else {    
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+// Close connection
+$conn->close();
+?>

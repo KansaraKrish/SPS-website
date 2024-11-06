@@ -16,3 +16,12 @@ function saveBuild() {
 
     alert('Build saved successfully!');
 }
+
+// window.addEventListener('beforeunload', function () {
+//     fetch('logout.php', {
+//         method: 'GET',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         }
+//     });
+// });

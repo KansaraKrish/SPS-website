@@ -14,9 +14,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $row = $result->fetch_assoc();
         // Verifying the password
         if (password_verify($password, $row['password'])) {
-            $_SESSION['user_id'] = $row['id'];
-            $_SESSION['role'] = $row['role'];
-            header("Location: product.html"); // Redirect to product page on success
+            $_SESSION['user_name'] = $row['name']; 
+            if(isset($_SESSION['user_name']))
+            {
+                header("Location: index.php"); // Redirect to product page on success
+            }
+       
         } else {
             $error = "Invalid password!";
         }

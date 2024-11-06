@@ -71,41 +71,9 @@
 
             <input type="submit" id="registerButton" value="Register">
 
-            <div id="otpSection">
-                <label for="otp">Enter OTP:</label>
-                <input type="number" id="otp" name="otp">
-                <input type="submit" id="submitOtp" value="Submit OTP">
-            </div>
             <div class="error" id="errorMsg"></div>
         </form>
     </div>
 
-    <script>
-        document.getElementById("registerForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            let registerBtn = document.getElementById("registerButton");
-            let otpSection = document.getElementById("otpSection");
-            let form = document.getElementById("registerForm");
-
-            // Send user details to process.php to generate OTP
-            let formData = new FormData(form);
-            fetch("send_otp.php", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                if (data === 'otp_sent') {
-                    registerBtn.style.display = "none";
-                    otpSection.style.display = "block";
-                } else {
-                    document.getElementById("errorMsg").innerText = "Error sending OTP!";
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        });
-    </script>
 </body>
 </html>

@@ -13,8 +13,20 @@
         <nav class="navbar">
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="login.php">Login</a></li>
+                <!-- <li><a href="login.php">Login</a></li> -->
             </ul>
+
+            <div class="login-area" style="position: absolute; right: 20px;top: 30px;font-size: 18px;">
+            <?php
+            session_start();
+            if (isset($_SESSION['user_name'])): ?>
+                <span>Welcome, <?= $_SESSION['user_name'] ?></span>
+            <?php else: ?>
+                <a href="login.php" class="login-btn" style="background-color: #008080; color: white;padding: 10px 15px; border-radius: 5px; text-decoration: none;
+    transition: background-color 0.3s ease;">Login</a>
+            <?php endif; ?>
+        </div>
+
         </nav>
     </header>
     <main>
