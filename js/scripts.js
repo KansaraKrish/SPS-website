@@ -1,21 +1,17 @@
-function updateBuild() {
-    const cpu = document.getElementById('cpu').value;
-    const gpu = document.getElementById('gpu').value;
-    const ram = document.getElementById('ram').value;
-    const storage = document.getElementById('storage').value;
+document.querySelectorAll("#cpu-brand, #gpu-brand").forEach(select => {
+    select.addEventListener("change", updateBuildPreview);
+});
 
-    const buildSummary = `CPU: ${cpu}<br>GPU: ${gpu}<br>RAM: ${ram}<br>Storage: ${storage}`;
-    document.getElementById('build-summary').innerHTML = buildSummary;
+function updateBuildPreview() {
+    const cpuBrand = document.getElementById("cpu-brand").options[document.getElementById("cpu-brand").selectedIndex].text.toLowerCase();
+    const gpuBrand = document.getElementById("gpu-brand").options[document.getElementById("gpu-brand").selectedIndex].text.toLowerCase();
 
-    let buildImage = 'images/default-build.jpg'; // Default image
-    if (cpu === 'Intel i9') {
-        buildImage = 'images/intel.jpg';
-    } else if (cpu === 'AMD Ryzen 9') {
-        buildImage = 'images/amd.jpg';
-    }
-
-    document.getElementById('build-image').src = buildImage;
+    let imageSrc = `images/${cpuBrand}_${gpuBrand}.jpg`;
+    document.getElementById("build-image").src = imageSrc;
+    document.getElementById("build-summary").innerText = `CPU: ${cpuBrand}, GPU: ${gpuBrand}`;
 }
+
+
 
 function saveBuild() {
     const cpu = document.getElementById('cpu').value;
