@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customize Your Build</title>
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/scripts.js" defer></script>
 </head>
 <body>
     <header>
@@ -24,7 +25,7 @@
                     
                     <!-- CPU Selection (Same as previous example) -->
                     <label for="cpu-brand">CPU Brand:</label>
-                    <select id="cpu-brand" name="cpu_brand" onchange="loadCategories('cpu')">
+                    <select id="cpu-brand" name="cpu_brand" onchange="loadCategories('cpu'); updateBuildPreview()">
                         <option value="" disabled selected>Select a Brand</option>
                         <?php
                         session_start();
@@ -49,7 +50,7 @@
 
                     <!-- GPU Selection -->
                     <label for="gpu-brand">GPU Brand:</label>
-                    <select id="gpu-brand" name="gpu_brand" onchange="loadCategories('gpu')">
+                    <select id="gpu-brand" name="gpu_brand" onchange="loadCategories('gpu'); updateBuildPreview()">
                         <option value="" disabled selected>Select a Brand</option>
                         <?php
                         $sql = "SELECT * FROM gpu_brands";
@@ -145,7 +146,7 @@
             </div>
             <div class="live-preview">
                 <h2>Your Build Preview</h2>
-                <img id="build-image" src="images/default-build.jpg" alt="Custom Build Preview" height="250" width="350">
+                <img id="build-image" src="images/default-build.jpeg" alt="Custom Build Preview" height="250" width="350">
                 <p id="build-summary"></p>
             </div>
         </section>
