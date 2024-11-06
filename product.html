@@ -20,7 +20,8 @@
                 <h2>Choose Your Components</h2>
                 <form id="custom-build-form">
                     <label for="cpu">CPU:</label>
-                    <select id="cpu" name="cpu" onchange="updateBuild()">
+                    <select id="cpu" name="cpu"  onchange="updateBuild()">
+                        <option value="" disabled selected>Select an option</option>
                         <option value="Intel i9">Intel i9</option>
                         <option value="AMD Ryzen 9">AMD Ryzen 9</option>
                     </select>
