@@ -25,7 +25,7 @@
                     
                     <!-- CPU Selection (Same as previous example) -->
                     <label for="cpu-brand">CPU Brand:</label>
-                    <select id="cpu-brand" name="cpu_brand" onchange="loadCategories('cpu'); updateBuildPreview()">
+                    <select id="cpu-brand" name="cpu_brand" onchange="loadCategories('cpu')">
                         <option value="" disabled selected>Select a Brand</option>
                         <?php
                         session_start();
@@ -44,7 +44,7 @@
                     </select>
 
                     <label for="cpu-model">CPU Model:</label>
-                    <select id="cpu-model" name="cpu_model" disabled>
+                    <select id="cpu-model" name="cpu_model" onchange="updateBuildPreview()" disabled>
                         <option value="" disabled selected>Select a Model</option>
                     </select>
 
@@ -186,6 +186,31 @@
                     modelSelect.disabled = false;
                 });
         }
+        function updateBuildPreview() {
+        
+        const cpuBrand = document.getElementById("cpu-category").value; // Get the selected CPU brand
+        const gpuBrand = document.getElementById("gpu-brand").value; // Get the selected GPU brand
+        const ramBrand = document.getElementById("ram-brand").value; // Get the selected RAM brand
+        const primaryStorageBrand = document.getElementById("primary-storage-brand").value; // Get the selected primary storage brand
+        const secondaryStorageBrand = document.getElementById("secondary-storage-brand").value; // Get the selected secondary storage brand
+
+        // Determine the image source based on the CPU brand
+        let imageSrc = '';
+        if (cpuBrand === 'amd') {
+            imageSrc = 'images/amd.jpg'; // Path for AMD image
+        } else if (cpuBrand === 'intel') {
+            imageSrc = 'images/intel.jpg'; // Path for Intel image
+        } else {
+            imageSrc = 'images/default-build.jpeg'; // Default image if no valid CPU brand is selected
+        }
+
+        // Update the image source
+        document.getElementById("build-image").src = imageSrc;
+
+        // Update the summary with selected components
+        document.getElementById("build-summary").innerText = 
+            `CPU: ${cpuBrand}, GPU: ${gpuBrand}, RAM: ${ramBrand}, Primary Storage: ${primaryStorageBrand}, Secondary Storage: ${secondaryStorageBrand}`;
+    }
     </script>
 </body>
 </html>
