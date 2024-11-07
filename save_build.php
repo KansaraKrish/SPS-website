@@ -27,11 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $ramModel = $_POST['ram_model'] ?? null;
 
     $primaryStorageBrand = $_POST['primary_storage_brand'] ?? null;
-    $primaryStorageCategory = $_POST['primary_storage_category'] ?? null;
+    $primaryStorageType = $_POST['primary_storage_type'] ?? null; // Changed from 'category' to 'type'
     $primaryStorageModel = $_POST['primary_storage_model'] ?? null;
 
     $secondaryStorageBrand = $_POST['secondary_storage_brand'] ?? null;
-    $secondaryStorageCategory = $_POST['secondary_storage_category'] ?? null;
+    $secondaryStorageType = $_POST['secondary_storage_type'] ?? null; // Changed from 'category' to 'type'
     $secondaryStorageModel = $_POST['secondary_storage_model'] ?? null;
 
     // Prepare the SQL query to insert the selected components into the database
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     // Prepare the statement
-    if ($stmt = $conn->prepare($sql))   {
+    if ($stmt = $conn->prepare($sql)) {
         // Bind the parameters to the prepared statement
         $stmt->bind_param("ssssssssssssssss", $cpuBrand, $cpuCategory, $cpuModel, $gpuBrand, $gpuCategory, $gpuModel,
                           $ramBrand, $ramCategory, $ramModel, $primaryStorageBrand, $primaryStorageCategory, $primaryStorageModel,

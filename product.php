@@ -170,11 +170,6 @@
             </div>
 
         </section>
-        <div id="price-display">
-    <h3>Total Price: <span id="total-price">0</span> USD</h3>
-    <form id="custom-build-form" action="save_build.php" method="post">
-    
-</form>
 </div>
 
     </main>
