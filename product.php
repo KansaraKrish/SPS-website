@@ -166,7 +166,6 @@
     <h3>Total Price: <span id="total-price">0</span> USD</h3>
 </div>
 <form id="custom-build-form" action="save_build.php" method="post">
-
     <button type="submit">Save Build</button>
 </form>
 
@@ -231,7 +230,7 @@
 
     // Update the build summary with the selected components
     document.getElementById("build-summary").innerText = 
-        `CPU: ${cpuBrand || 'N/A'}, GPU: ${gpuBrand || 'N/A'}, RAM: ${ramBrand || 'N/A'}, Primary Storage: ${primaryStorageBrand || 'N/A'}, Secondary Storage: ${secondaryStorageBrand || 'N/A'}`;
+        `CPU: ${cpuBrand}, GPU: ${gpuBrand}, RAM: ${ramBrand}, Primary Storage: ${primaryStorageBrand}, Secondary Storage: ${secondaryStorageBrand}`;
 }
     </script>
 </body>

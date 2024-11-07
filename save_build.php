@@ -41,7 +41,7 @@ $sql = "INSERT INTO user_hardware (
 $stmt = $conn->prepare($sql);
 
 // Bind parameters
-$stmt->bind_param("sssssssssssssss", 
+$stmt->bind_param("", 
     $user_name, $cpu_brand, $cpu_category, $cpu_model, 
     $gpu_brand, $gpu_category, $gpu_model, 
     $ram_brand, $ram_category, $ram_model, 
