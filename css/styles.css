@@ -191,7 +191,7 @@ main {
     text-align: left; /* Adjusted to left-align text for better readability */
     position: fixed;  
     right: 0;  
-    top: 120px; 
+    top: 10px; 
     background-color: white;
     padding: 20px;
     border-radius: 10px;
@@ -218,7 +218,7 @@ main {
 }
 
 .live-preview img {
-    margin-top: 20px;
+    margin-top: 10px;
     border-radius: 5px;
     width: 100%; /* Ensure the image fits the container */
     max-width: 350px; /* Constrain the image size */
