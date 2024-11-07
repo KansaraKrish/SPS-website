@@ -1,0 +1,147 @@
+/* Reset and basic styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+    color: rgb(20, 48, 58);
+}
+
+/* Header styling */
+header {
+    background-color: #008080;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+header h2 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    color: rgb(20, 48, 58);
+}
+
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    background-color: #008080;
+    margin-top: 10px;
+}
+
+.navbar ul li {
+    display: inline-block;
+    position: relative;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 15px 20px;
+    font-size: 18px;
+    display: block;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar ul li a:hover {
+    background-color: #008080;
+    color: #ffeb3b;
+    border-radius: 5px;
+}
+
+.navbar .login-area {
+    float: right;
+    font-size: 18px;
+    color: white;
+    margin-right: 20px;
+}
+
+/* Main container for orders */
+.orders-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.no-orders {
+    text-align: center;
+    font-size: 25px;
+    color: rgb(20, 48, 58);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+}
+
+.no-orders a {
+    color: #008080;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Order card styling */
+.order-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.order-details h3 {
+    font-size: 25px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    color: rgb(20, 48, 58);
+}
+
+.order-details p {
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(20, 48, 58);
+}
+
+.order-image img {
+    width: 150px;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Button styling for any action buttons */
+button {
+    display: block;
+    background-color: #008080;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px auto;
+}
+
+button:hover {
+    background-color: #006666;
+}
+
+/* Footer styling */
+footer {
+    background-color: #008080;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
