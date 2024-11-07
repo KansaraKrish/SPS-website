@@ -206,31 +206,33 @@
                 });
         }
         function updateBuildPreview() {
-        
-        const cpuBrand = document.getElementById("cpu-category").value; // Get the selected CPU brand
-        const gpuBrand = document.getElementById("gpu-brand").value; // Get the selected GPU brand
-        const ramBrand = document.getElementById("ram-brand").value; // Get the selected RAM brand
-        const primaryStorageBrand = document.getElementById("primary-storage-brand").value; // Get the selected primary storage brand
-        const secondaryStorageBrand = document.getElementById("secondary-storage-brand").value; // Get the selected secondary storage brand
+    // Get selected component values (brand names, category names, etc.)
+    const cpuBrand = document.getElementById("cpu-brand").options[document.getElementById("cpu-brand").selectedIndex]?.text;
+    const gpuBrand = document.getElementById("gpu-brand").options[document.getElementById("gpu-brand").selectedIndex]?.text;
+    const ramBrand = document.getElementById("ram-brand").options[document.getElementById("ram-brand").selectedIndex]?.text;
+    const primaryStorageBrand = document.getElementById("primary-storage-brand").options[document.getElementById("primary-storage-brand").selectedIndex]?.text;
+    const secondaryStorageBrand = document.getElementById("secondary-storage-brand").options[document.getElementById("secondary-storage-brand").selectedIndex]?.text;
 
-        // Determine the image source based on the CPU brand
-        let imageSrc = '';
-        if (cpuBrand === 'amd') {
-            imageSrc = 'images/amd.jpg'; // Path for AMD image
-        } else if (cpuBrand === 'intel') {
-            imageSrc = 'images/intel.jpg'; // Path for Intel image
-        } else {
-            imageSrc = 'images/default-build.jpeg'; // Default image if no valid CPU brand is selected
-        }
+    // Log the values for debugging
+    console.log(cpuBrand, gpuBrand, ramBrand, primaryStorageBrand, secondaryStorageBrand);
 
-        // Update the image source
-        document.getElementById("build-image").src = imageSrc;
-
-        // Update the summary with selected components
-        document.getElementById("build-summary").innerText = 
-            `CPU: ${cpuBrand}, GPU: ${gpuBrand}, RAM: ${ramBrand}, Primary Storage: ${primaryStorageBrand}, Secondary Storage: ${secondaryStorageBrand}`;
+    // Determine the image source based on the selected CPU brand
+    let imageSrc = '';
+    if (cpuBrand === 'AMD') {
+        imageSrc = 'images/amd.jpg'; // Path for AMD image
+    } else if (cpuBrand === 'Intel') {
+        imageSrc = 'images/intel.jpg'; // Path for Intel image
+    } else {
+        imageSrc = 'images/default-build.jpeg'; // Default image if no valid CPU brand is selected
     }
-  
+
+    // Update the image source in the preview
+    document.getElementById("build-image").src = imageSrc;
+
+    // Update the build summary with the selected components
+    document.getElementById("build-summary").innerText = 
+        `CPU: ${cpuBrand || 'N/A'}, GPU: ${gpuBrand || 'N/A'}, RAM: ${ramBrand || 'N/A'}, Primary Storage: ${primaryStorageBrand || 'N/A'}, Secondary Storage: ${secondaryStorageBrand || 'N/A'}`;
+}
     </script>
 </body>
 </html>
