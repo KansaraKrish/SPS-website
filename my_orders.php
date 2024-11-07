@@ -13,7 +13,6 @@
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="product.php">Customize</a></li>
-
             </ul>
 
             <!-- Login Button or Username Placeholder -->
@@ -33,30 +32,55 @@
         <h1>My Orders</h1>
 
         <?php
-            // Example code to fetch orders from the database
-            // Assume user is logged in and username is stored in session
+            // Include database connection
+            require 'db.php'; // Ensure this points to your actual database connection file
+
+            // Check if the user is logged in
             if (isset($_SESSION['user_name'])) {
                 $user_name = $_SESSION['user_name'];
-                // Fetch orders based on username from your database
-                // Example: $orders = fetchOrdersByUser($user_name);
 
-                if (empty($orders)): // No orders found
-                    echo '<p>My Orders is empty. <a href="product.php">Go to Customize</a></p>';
-                else: // Orders are available
-                    // Loop through orders and display each
-                    foreach ($orders as $order) {
-                        echo '
-                        <div class="order">
-                            <h2>Order #'.$order['id'].'</h2>
-                            <p>CPU: '.$order['cpu'].'<br>
-                            GPU: '.$order['gpu'].'<br>
-                            RAM: '.$order['ram'].'<br>
-                            Storage: '.$order['storage'].'<br>
-                            Total Price: $'.$order['price'].'</p>
-                            <img src="images/'.$order['image'].'" alt="Order Image" style="max-width: 300px; margin-top: 20px;">
-                        </div>';
+                // Fetch orders from the database where user_name matches the session user
+                $sql = "SELECT * FROM user_hardware WHERE user_name = ?";
+                if ($stmt = $conn->prepare($sql)) {
+                    // Bind the username parameter to the query
+                    $stmt->bind_param("s", $user_name);
+                    
+                    // Execute the query
+                    $stmt->execute();
+                    
+                    // Get the result
+                    $result = $stmt->get_result();
+                    
+                    // Check if any orders were found
+                    if ($result->num_rows > 0) {
+                        // Loop through the orders and display them
+                        while ($order = $result->fetch_assoc()) {
+                            echo '
+                            <div class="order">
+                                <h2>Order #' . $order['id'] . '</h2>
+                                <p>CPU: ' . $order['cpu_brand'] . ' ' . $order['cpu_category'] . ' ' . $order['cpu_model'] . '<br>
+                                GPU: ' . $order['gpu_brand'] . ' ' . $order['gpu_category'] . ' ' . $order['gpu_model'] . '<br>
+                                RAM: ' . $order['ram_brand'] . ' ' . $order['ram_category'] . ' ' . $order['ram_model'] . '<br>
+                                Storage: ' . $order['primary_storage_brand'] . ' ' . $order['primary_storage_category'] . ' ' . $order['primary_storage_model'] . ' / ' . $order['secondary_storage_brand'] . ' ' . $order['secondary_storage_category'] . ' ' . $order['secondary_storage_model'] . '<br>
+                                Total Price: $' . $order['price'] . '</p>
+                                <img src="images/' . $order['image'] . '" alt="Order Image" style="max-width: 300px; margin-top: 20px;">
+                            </div>';
+                        }
+                    } else {
+                        // If no orders found
+                        echo '<p>My Orders is empty. <a href="product.php">Go to Customize</a></p>';
                     }
-                endif;
+
+                    // Close the statement
+                    $stmt->close();
+                } else {
+                    echo "Error fetching orders: " . $conn->error;
+                }
+
+                // Close the connection
+                $conn->close();
+            } else {
+                echo '<p>Please log in to view your orders.</p>';
             }
         ?>
 
