@@ -10,7 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
     
-    // Assuming the user's ID is stored in the session
+    // Get the username from the session
+    $userName = $_SESSION['user_name']; // Assuming the user's name is stored in the session
+
     // Get the selected component values from the form
     $cpuBrand = $_POST['cpu_brand'] ?? null;
     $cpuCategory = $_POST['cpu_category'] ?? null;
@@ -35,15 +37,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Prepare the SQL query to insert the selected components into the database
     $sql = "INSERT INTO user_hardware (cpu_brand, cpu_category, cpu_model, gpu_brand, gpu_category, gpu_model, 
             ram_brand, ram_category, ram_model, primary_storage_brand, primary_storage_category, primary_storage_model, 
-            secondary_storage_brand, secondary_storage_category, secondary_storage_model, user_id) 
+            secondary_storage_brand, secondary_storage_category, secondary_storage_model, user_name) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     // Prepare the statement
     if ($stmt = $conn->prepare($sql))   {
         // Bind the parameters to the prepared statement
-        $stmt->bind_param($username, $cpuBrand, $cpuCategory, $cpuModel, $gpuBrand, $gpuCategory, $gpuModel,
+        $stmt->bind_param("ssssssssssssssss", $cpuBrand, $cpuCategory, $cpuModel, $gpuBrand, $gpuCategory, $gpuModel,
                           $ramBrand, $ramCategory, $ramModel, $primaryStorageBrand, $primaryStorageCategory, $primaryStorageModel,
-                          $secondaryStorageBrand, $secondaryStorageCategory, $secondaryStorageModel, $userId);
+                          $secondaryStorageBrand, $secondaryStorageCategory, $secondaryStorageModel, $userName);
         
         // Execute the query
         if ($stmt->execute()) {
