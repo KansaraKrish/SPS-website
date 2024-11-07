@@ -33,7 +33,7 @@
         <section class="customization">
             <div class="options">
                 <h2>Choose Your Components</h2>
-                <form id="custom-build-form">
+                <form id="custom-build-form" action="save_build.php" method="POST">
                     
                     <!-- CPU Selection (Same as previous example) -->
                     <label for="cpu-brand">CPU Brand:</label>
@@ -153,7 +153,7 @@
                     <select id="secondary-storage-model" name="secondary_storage_model" disabled>
                         <option value="" disabled selected>Select a Model</option>
                     </select>
-
+                    <button type="submit">Save Build</button>
                 </form>
             </div>
             <div class="live-preview">
@@ -164,10 +164,11 @@
         </section>
         <div id="price-display">
     <h3>Total Price: <span id="total-price">0</span> USD</h3>
-</div>
-<form id="custom-build-form" action="save_build.php" method="post">
-    <button type="submit">Save Build</button>
+    <form id="custom-build-form" action="save_build.php" method="post">
+    
 </form>
+</div>
+
     </main>
     <footer>
         <p>&copy; 2024 Custom Desktop Builder. All rights reserved.</p>
