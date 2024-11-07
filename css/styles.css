@@ -188,23 +188,41 @@ main {
 
 .live-preview {
     width: 35%;
-    text-align: center;
+    text-align: left; /* Adjusted to left-align text for better readability */
     position: fixed;  
     right: 0;  
-    top: 120px; 
+    top: 10px; 
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif; /* Optional: Use a more readable font */
+    max-height: 90%; /* Ensures the preview doesn't take up too much vertical space */
+    overflow-y: auto; /* Enables scrolling if content overflows */
 }
+
 .live-preview h2 {
     color: #008080;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    font-size: 20px; /* Adjust the size of the heading */
+}
+
+.live-preview p {
+    font-size: 16px ; /* Enforced font size to ensure it overrides any inherited styles */
+    margin-bottom: 10px; /* Space out the paragraphs for better readability */
+}
+
+#build-preview p {
+    font-size: 16px; /* Or whatever size you need */
+    margin-bottom: 10px;
 }
 
 .live-preview img {
-    margin-bottom: 20px;
+    margin-top: 10px;
     border-radius: 5px;
+    width: 100%; /* Ensure the image fits the container */
+    max-width: 350px; /* Constrain the image size */
+    height: auto; /* Maintain aspect ratio */
 }
 
 #build-summary {
@@ -226,13 +244,9 @@ button {
     font-size: 16px;
     margin: 20px auto;
 }
-
 button:hover {
     background-color: #006666;
 }
-
-
-
 footer {
     position: fixed; /* Make the footer fixed */
     bottom: 0;
@@ -240,3 +254,27 @@ footer {
 }
 }
 
+.live-preview p#cpu-summary {
+    font-size: 14px !important;
+    margin-bottom: 0px;
+}
+
+.live-preview p#gpu-summary {
+    font-size: 14px !important;
+    margin-bottom: 10px;
+}
+
+.live-preview p#ram-summary {
+    font-size: 14px !important;
+    margin-bottom: 10px;
+}
+
+.live-preview p#primary-storage-summary {
+    font-size: 14px !important;
+    margin-bottom: 10px;
+}
+
+.live-preview p#secondary-storage-summary {
+    font-size: 14px !important;
+    margin-bottom: 10px;
+}
