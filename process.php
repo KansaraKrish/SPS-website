@@ -23,7 +23,7 @@ $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 $sql = "INSERT INTO users(email, password, phone, name) VALUES ('$email', '$hashed_password', '$number', '$name')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "Registration successful!";
+    header("Location: index.php");
 } else {    
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

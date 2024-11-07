@@ -225,7 +225,7 @@
                 <p>CPU: Intel i9</p>
                 <p>GPU: NVIDIA RTX 3080</p>
                 <p>RAM: 16GB</p>
-                <p>Storage: 2TB SSD</p>
+                <p>Storage: 1TB SSD</p>
                 <a href="product.php" class="btn">Add This</a>
             </div>
             <div class="product-image">
