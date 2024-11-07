@@ -164,7 +164,7 @@
             <?php endif; ?>
         </div>
 
-        <a href="my_orders.html"><img src="images/shopping-cart1.png" alt="Cart" class="cart-icon"></a>
+        <a href="my_orders.php"><img src="images/shopping-cart1.png" alt="Cart" class="cart-icon"></a>
             </nav>
         </header>  
 
