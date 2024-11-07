@@ -191,7 +191,7 @@ main {
     text-align: left; /* Adjusted to left-align text for better readability */
     position: fixed;  
     right: 0;  
-    top: 10px; 
+    top: 20%; 
     background-color: white;
     padding: 20px;
     border-radius: 10px;

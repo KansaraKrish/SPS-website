@@ -14,24 +14,6 @@
                 <li><a href="index.php">Home</a></li>
                 <li><a href="product.php">Customize</a></li>
 
-                <!-- Dropdown for Pc Studio -->
-                <li class="dropdown">
-                    <a href="pcstudio.php">Our Pre-Builts</a>
-                    <ul class="dropdown-content">
-                        <li><a href="pcstudio.php">Gaming PCs</a></li>
-                        <li><a href="workstation.php">Workstations</a></li>
-                    </ul>
-                </li>
-
-                <!-- Dropdown for Pc Peripherals -->
-                <li class="dropdown">
-                    <a href="pcper.php">Pc Peripherals</a>
-                    <ul class="dropdown-content">
-                        <li><a href="pcper.php">Monitors</a></li>
-                        <li><a href="keyboards.php">Keyboards</a></li>
-                        <li><a href="mice.php">Mice</a></li>
-                    </ul>
-                </li>
             </ul>
 
             <!-- Login Button or Username Placeholder -->
