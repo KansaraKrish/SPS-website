@@ -74,7 +74,7 @@
                     </select>
 
                     <label for="gpu-category">GPU Category:</label>
-                    <select id="gpu-category" name="gpu_category" onchange="loadModels('gpu')" disabled>
+                    <select id="gpu-category" name="gpu_category" onchange="loadModels('gpu'); updateBuildPreview()" disabled>
                         <option value="" disabled selected>Select a Category</option>
                     </select>
 
@@ -85,7 +85,7 @@
 
                     <!-- RAM Selection -->
                     <label for="ram-brand">RAM Brand:</label>
-                    <select id="ram-brand" name="ram_brand" onchange="loadCategories('ram')">
+                    <select id="ram-brand" name="ram_brand" onchange="loadCategories('ram'); updateBuildPreview()">
                         <option value="" disabled selected>Select a Brand</option>
                         <?php
                         $sql = "SELECT * FROM ram_brands";
@@ -97,7 +97,7 @@
                     </select>
 
                     <label for="ram-category">RAM Category:</label>
-                    <select id="ram-category" name="ram_category" onchange="loadModels('ram')" disabled>
+                    <select id="ram-category" name="ram_category" onchange="loadModels('ram'); updateBuildPreview()" disabled>
                         <option value="" disabled selected>Select a Category</option>
                     </select>
 
@@ -109,7 +109,7 @@
                     <!-- Primary Storage Selection -->
                     <h3>Primary Storage (e.g., for OS)</h3>
                     <label for="primary-storage-brand">Storage Brand:</label>
-                    <select id="primary-storage-brand" name="primary_storage_brand" onchange="loadCategories('primary-storage')">
+                    <select id="primary-storage-brand" name="primary_storage_brand" onchange="loadCategories('primary-storage'); updateBuildPreview()">
                         <option value="" disabled selected>Select a Brand</option>
                         <?php
                         $sql = "SELECT * FROM storage_brands";
@@ -121,7 +121,7 @@
                     </select>
 
                     <label for="primary-storage-category">Storage Type:</label>
-                    <select id="primary-storage-category" name="primary_storage_category" onchange="loadModels('primary-storage')" disabled>
+                    <select id="primary-storage-category" name="primary_storage_category" onchange="loadModels('primary-storage'); updateBuildPreview()" disabled>
                         <option value="" disabled selected>Select a Type</option>
                     </select>
 
@@ -133,7 +133,7 @@
                     <!-- Secondary Storage Selection -->
                     <h3>Secondary Storage (e.g., for extra storage)</h3>
                     <label for="secondary-storage-brand">Storage Brand:</label>
-                    <select id="secondary-storage-brand" name="secondary_storage_brand" onchange="loadCategories('secondary-storage')">
+                    <select id="secondary-storage-brand" name="secondary_storage_brand" onchange="loadCategories('secondary-storage'); updateBuildPreview()">
                         <option value="" disabled selected>Select a Brand</option>
                         <?php
                         $sql = "SELECT * FROM storage_brands";
@@ -145,7 +145,7 @@
                     </select>
 
                     <label for="secondary-storage-category">Storage Type:</label>
-                    <select id="secondary-storage-category" name="secondary_storage_category" onchange="loadModels('secondary-storage')" disabled>
+                    <select id="secondary-storage-category" name="secondary_storage_category" onchange="loadModels('secondary-storage'); updateBuildPreview()" disabled>
                         <option value="" disabled selected>Select a Type</option>
                     </select>
 
@@ -156,11 +156,19 @@
                     <button type="submit">Save Build</button>
                 </form>
             </div>
+            <!-- Build Preview Section -->
             <div class="live-preview">
                 <h2>Your Build Preview</h2>
+                <div id="build-preview">
+                    <p id="cpu-summary"></p>
+                    <p id="gpu-summary"></p>
+                    <p id="ram-summary"></p>
+                    <p id="primary-storage-summary"></p>
+                    <p id="secondary-storage-summary"></p>
+                </div>
                 <img id="build-image" src="images/default-build.jpeg" alt="Custom Build Preview" height="250" width="350">
-                <p id="build-summary"></p>
             </div>
+
         </section>
         <div id="price-display">
     <h3>Total Price: <span id="total-price">0</span> USD</h3>
@@ -204,33 +212,38 @@
                     modelSelect.disabled = false;
                 });
         }
+        // Function to update the build preview dynamically
         function updateBuildPreview() {
-    // Get selected component values (brand names, category names, etc.)
-    const cpuBrand = document.getElementById("cpu-brand").options[document.getElementById("cpu-brand").selectedIndex]?.text;
-    const gpuBrand = document.getElementById("gpu-brand").options[document.getElementById("gpu-brand").selectedIndex]?.text;
-    const ramBrand = document.getElementById("ram-brand").options[document.getElementById("ram-brand").selectedIndex]?.text;
-    const primaryStorageBrand = document.getElementById("primary-storage-brand").options[document.getElementById("primary-storage-brand").selectedIndex]?.text;
-    const secondaryStorageBrand = document.getElementById("secondary-storage-brand").options[document.getElementById("secondary-storage-brand").selectedIndex]?.text;
+        // Get selected component values (brand names and model names)
+        const cpuBrand = document.getElementById("cpu-brand").options[document.getElementById("cpu-brand").selectedIndex]?.text;
+        const gpuBrand = document.getElementById("gpu-brand").options[document.getElementById("gpu-brand").selectedIndex]?.text;
+        
+        // Get the selected models (these are the 'text' values for user-friendly display)
+        const cpuModel = document.getElementById('cpu-model').options[document.getElementById('cpu-model').selectedIndex]?.text;
+        const gpuModel = document.getElementById('gpu-model').options[document.getElementById('gpu-model').selectedIndex]?.text;
+        const ramModel = document.getElementById('ram-model').options[document.getElementById('ram-model').selectedIndex]?.text;
+        const primaryStorageModel = document.getElementById('primary-storage-model').options[document.getElementById('primary-storage-model').selectedIndex]?.text;
+        const secondaryStorageModel = document.getElementById('secondary-storage-model').options[document.getElementById('secondary-storage-model').selectedIndex]?.text;
 
-    // Log the values for debugging
-    console.log(cpuBrand, gpuBrand, ramBrand, primaryStorageBrand, secondaryStorageBrand);
+        // Update the preview summary
+        document.getElementById('cpu-summary').innerHTML = cpuModel ? `<strong>CPU:</strong> ${cpuModel}` : '';
+        document.getElementById('gpu-summary').innerHTML = gpuModel ? `<strong>GPU:</strong> ${gpuModel}` : '';
+        document.getElementById('ram-summary').innerHTML = ramModel ? `<strong>RAM:</strong> ${ramModel}` : '';
+        document.getElementById('primary-storage-summary').innerHTML = primaryStorageModel ? `<strong>Primary Storage:</strong> ${primaryStorageModel}` : '';
+        document.getElementById('secondary-storage-summary').innerHTML = secondaryStorageModel ? `<strong>Secondary Storage:</strong> ${secondaryStorageModel}` : '';
 
-    // Determine the image source based on the selected CPU brand
-    let imageSrc = '';
-    if (cpuBrand === 'AMD') {
-        imageSrc = 'images/amd.jpg'; // Path for AMD image
-    } else if (cpuBrand === 'Intel') {
-        imageSrc = 'images/intel.jpg'; // Path for Intel image
-    } else {
-        imageSrc = 'images/default-build.jpeg'; // Default image if no valid CPU brand is selected
+        // Determine the image source based on the selected CPU and GPU brands (with fallback)
+        let imageSrc = 'images/default-build.jpeg'; // Default image
+        if (cpuBrand === 'AMD') {
+            imageSrc = 'images/amd.jpg'; // Path for AMD image
+        } else if (cpuBrand === 'Intel') {
+            imageSrc = 'images/intel.jpg'; // Path for Intel image
+        } else if (gpuBrand === 'NVIDIA') {
+            imageSrc = 'images/nvidia.jpg'; // Path for NVIDIA GPU image (if needed)
+        }
+        // Update the image source in the preview
+        document.getElementById("build-image").src = imageSrc;
     }
-    // Update the image source in the preview
-    document.getElementById("build-image").src = imageSrc;
-
-    // Update the build summary with the selected components
-    document.getElementById("build-summary").innerText = 
-        `CPU: ${cpuBrand}, GPU: ${gpuBrand}, RAM: ${ramBrand}, Primary Storage: ${primaryStorageBrand}, Secondary Storage: ${secondaryStorageBrand}`;
-}
     </script>
 </body>
 </html>
