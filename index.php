@@ -13,8 +13,6 @@
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="product.php">Customize</a></li>
-
-        
                     <!-- Dropdown for Pc Studio -->
                     <li class="dropdown">
                         <a href="pcstudio.php">Our Pre-Builts</a>
@@ -53,8 +51,6 @@
     
         <section>
             <h1>Welcome To Our Website</h1>
-
-
             <h2>Build Your Custom Desktop</h2>
             <p>Choose from a range of components and build your dream machine.</p>
             
@@ -89,8 +85,6 @@
     </table>
     <footer>
         <p>&copy; 2024 Custom Desktop Builder. All rights reserved.</p>
-    </footer>
-
-    
+    </footer>    
 </body>
 </html>

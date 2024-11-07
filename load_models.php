@@ -35,7 +35,6 @@ $models = [];
 while ($row = $result->fetch_assoc()) {
     $models[] = $row;
 }
-
 $stmt->close();
 $conn->close();
 

@@ -30,12 +30,10 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $brand_id);
 $stmt->execute();
 $result = $stmt->get_result();
-
 $categories = [];
 while ($row = $result->fetch_assoc()) {
     $categories[] = $row;
 }
-
 $stmt->close();
 $conn->close();
 

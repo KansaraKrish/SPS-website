@@ -168,7 +168,6 @@
 <form id="custom-build-form" action="save_build.php" method="post">
     <button type="submit">Save Build</button>
 </form>
-
     </main>
     <footer>
         <p>&copy; 2024 Custom Desktop Builder. All rights reserved.</p>
@@ -224,7 +223,6 @@
     } else {
         imageSrc = 'images/default-build.jpeg'; // Default image if no valid CPU brand is selected
     }
-
     // Update the image source in the preview
     document.getElementById("build-image").src = imageSrc;
 
