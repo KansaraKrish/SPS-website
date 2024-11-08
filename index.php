@@ -243,7 +243,7 @@
                 <a href="product.php" class="btn">Add This</a>
             </div>
             <div class="product-image">
-                <img src="images/amd.jpg" alt="AMD PC" width="400" height="300">
+                <img src="images/AMD.jpeg" alt="AMD PC" width="400" height="300">
             </div>
         </div>
     </div>
@@ -260,7 +260,7 @@
                 <a href="product.php" class="btn">Add This</a>
             </div>
             <div class="product-image">
-                <img src="images/intel.jpg" alt="Intel PC" width="400" height="300">
+                <img src="images/intelnew.webp" alt="Intel PC" width="400" height="300">
             </div>
         </div>
     <div class="product-card">

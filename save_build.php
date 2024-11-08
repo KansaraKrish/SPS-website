@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         // Execute the query
         if ($stmt->execute()) {
-            echo "Your build has been saved successfully!";
+            header("Location: index.php");        
         } else {
             echo "Error saving build: " . $stmt->error;
         }
