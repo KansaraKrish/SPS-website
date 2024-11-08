@@ -217,20 +217,21 @@
     </table> -->
 
 
-    <div class="product-container">
-        <div class="product-card">
-            <div class="product-details">
-                <h2>Configuration 1</h2>
-                <p>CPU: Intel i9</p>
-                <p>GPU: NVIDIA RTX 3080</p>
-                <p>RAM: 16GB</p>
-                <p>Storage: 1TB SSD</p>
-                <a href="product.php" class="btn">Add This</a>
+        <div class="product-container">
+            <div class="product-card">
+                <div class="product-details">
+                    <h2>Configuration 1</h2>
+                    <p>Intel Core i9-12900K</p>
+                    <p>NVIDIA GeForce RTX 4060</p>
+                    <p>Corsair Vengeance LPX 16GB DDR4 3200MHz</p>
+                    <p>Samsung 970 EVO Plus 1TB SSD</p>
+                    <p>Western Digital Blue 1TB HDD</p>
+                    <a href="product.php" class="btn">Add This</a>
+                </div>
+                <div class="product-image">
+                    <img src="images/intel.jpg" alt="Intel PC" width="400" height="300">
+                </div>
             </div>
-            <div class="product-image">
-                <img src="images/intelfinal.webp" alt="Intel PC" width="400" height="300">
-            </div>
-        </div>
 
         <div class="product-card">
             <div class="product-details">
