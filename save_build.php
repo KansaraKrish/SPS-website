@@ -14,35 +14,57 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $userName = $_SESSION['user_name'];
 
     // Get the selected component values from the form
-    $cpuBrand = $_POST['cpu_brand'] ?? null;
-    $cpuCategory = $_POST['cpu_category'] ?? null;
-    $cpuModel = $_POST['cpu_model'] ?? null;
+    $cpuBrandId = $_POST['cpu_brand'] ?? null;
+    $cpuCategoryId = $_POST['cpu_category'] ?? null;
+    $cpuModelId = $_POST['cpu_model'] ?? null;
 
-    $gpuBrand = $_POST['gpu_brand'] ?? null;
-    $gpuCategory = $_POST['gpu_category'] ?? null;
-    $gpuModel = $_POST['gpu_model'] ?? null;
+    $gpuBrandId = $_POST['gpu_brand'] ?? null;
+    $gpuCategoryId = $_POST['gpu_category'] ?? null;
+    $gpuModelId = $_POST['gpu_model'] ?? null;
 
-    $ramBrand = $_POST['ram_brand'] ?? null;
-    $ramCategory = $_POST['ram_category'] ?? null;
-    $ramModel = $_POST['ram_model'] ?? null;
+    $ramBrandId = $_POST['ram_brand'] ?? null;
+    $ramCategoryId = $_POST['ram_category'] ?? null;
+    $ramModelId = $_POST['ram_model'] ?? null;
 
-    $primaryStorageBrand = $_POST['primary_storage_brand'] ?? null;
-    $primaryStorageCategory = $_POST['primary_storage_category'] ?? null;
-    $primaryStorageModel = $_POST['primary_storage_model'] ?? null;
+    $primaryStorageBrandId = $_POST['primary_storage_brand'] ?? null;
+    $primaryStorageCategoryId = $_POST['primary_storage_category'] ?? null;
+    $primaryStorageModelId = $_POST['primary_storage_model'] ?? null;
 
-    $secondaryStorageBrand = $_POST['secondary_storage_brand'] ?? null;
-    $secondaryStorageCategory = $_POST['secondary_storage_category'] ?? null;
-    $secondaryStorageModel = $_POST['secondary_storage_model'] ?? null;
+    $secondaryStorageBrandId = $_POST['secondary_storage_brand'] ?? null;
+    $secondaryStorageCategoryId = $_POST['secondary_storage_category'] ?? null;
+    $secondaryStorageModelId = $_POST['secondary_storage_model'] ?? null;
 
     // Calculate the total price (modify this if prices are fetched from database or calculated differently)
-    $totalPrice = 1000.00; // Placeholder value for total price
+    $totalPrice = 0; // Placeholder value for total price
 
-    // Create build summary with <br> tags
-    $buildSummary = "CPU: $cpuBrand $cpuCategory $cpuModel<br>" .
-                    "GPU: $gpuBrand $gpuCategory $gpuModel<br>" .
-                    "RAM: $ramBrand $ramCategory $ramModel<br>" .
-                    "Primary Storage: $primaryStorageBrand $primaryStorageCategory $primaryStorageModel<br>" .
-                    "Secondary Storage: $secondaryStorageBrand $secondaryStorageCategory $secondaryStorageModel";
+    // Function to retrieve component name based on IDs
+    function getComponentName($conn, $table, $brandId, $categoryId, $modelId) {
+        $sql = "SELECT CONCAT(b.brand_name, ' ', c.category_name, ' ', m.model_name) AS full_name 
+                FROM {$table}_brands b
+                JOIN {$table}_categories c ON c.category_id = ?
+                JOIN {$table}_models m ON m.model_id = ?
+                WHERE b.brand_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("iii", $categoryId, $modelId, $brandId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        return $row['full_name'] ?? "Unknown";
+    }
+
+    // Fetch actual component names
+    $cpuDetails = getComponentName($conn, 'cpu', $cpuBrandId, $cpuCategoryId, $cpuModelId);
+    $gpuDetails = getComponentName($conn, 'gpu', $gpuBrandId, $gpuCategoryId, $gpuModelId);
+    $ramDetails = getComponentName($conn, 'ram', $ramBrandId, $ramCategoryId, $ramModelId);
+    $primaryStorageDetails = getComponentName($conn, 'storage', $primaryStorageBrandId, $primaryStorageCategoryId, $primaryStorageModelId);
+    $secondaryStorageDetails = getComponentName($conn, 'storage', $secondaryStorageBrandId, $secondaryStorageCategoryId, $secondaryStorageModelId);
+
+    // Create build summary with actual names
+    $buildSummary = "CPU: $cpuDetails<br>" .
+                    "GPU: $gpuDetails<br>" .
+                    "RAM: $ramDetails<br>" .
+                    "Primary Storage: $primaryStorageDetails<br>" .
+                    "Secondary Storage: $secondaryStorageDetails";
 
     // Begin transaction
     $conn->begin_transaction();
@@ -56,11 +78,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $stmtHardware = $conn->prepare($sqlHardware);
         $stmtHardware->bind_param("ssssssssssssssss", 
-                                  $cpuBrand, $cpuCategory, $cpuModel, 
-                                  $gpuBrand, $gpuCategory, $gpuModel,
-                                  $ramBrand, $ramCategory, $ramModel, 
-                                  $primaryStorageBrand, $primaryStorageCategory, $primaryStorageModel, 
-                                  $secondaryStorageBrand, $secondaryStorageCategory, $secondaryStorageModel, 
+                                  $cpuBrandId, $cpuCategoryId, $cpuModelId, 
+                                  $gpuBrandId, $gpuCategoryId, $gpuModelId,
+                                  $ramBrandId, $ramCategoryId, $ramModelId, 
+                                  $primaryStorageBrandId, $primaryStorageCategoryId, $primaryStorageModelId, 
+                                  $secondaryStorageBrandId, $secondaryStorageCategoryId, $secondaryStorageModelId, 
                                   $userName);
         
         if (!$stmtHardware->execute()) {
