@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     
     // Get the username from the session
-    $userName = $_SESSION['user_name']; // Assuming the user's name is stored in the session
+    $userName = $_SESSION['user_name'];
 
     // Get the selected component values from the form
     $cpuBrand = $_POST['cpu_brand'] ?? null;
@@ -34,30 +34,73 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $secondaryStorageCategory = $_POST['secondary_storage_category'] ?? null;
     $secondaryStorageModel = $_POST['secondary_storage_model'] ?? null;
 
-    // Prepare the SQL query to insert the selected components into the database
-    $sql = "INSERT INTO user_hardware (cpu_brand, cpu_category, cpu_model, gpu_brand, gpu_category, gpu_model, 
-            ram_brand, ram_category, ram_model, primary_storage_brand, primary_storage_category, primary_storage_model, 
-            secondary_storage_brand, secondary_storage_category, secondary_storage_model, user_name) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    // Calculate the total price (modify this if prices are fetched from database or calculated differently)
+    $totalPrice = 1000.00; // Placeholder value for total price
 
-    // Prepare the statement
-    if ($stmt = $conn->prepare($sql))   {
-        // Bind the parameters to the prepared statement
-        $stmt->bind_param("ssssssssssssssss", $cpuBrand, $cpuCategory, $cpuModel, $gpuBrand, $gpuCategory, $gpuModel,
-                          $ramBrand, $ramCategory, $ramModel, $primaryStorageBrand, $primaryStorageCategory, $primaryStorageModel,
-                          $secondaryStorageBrand, $secondaryStorageCategory, $secondaryStorageModel, $userName);
+    // Create build summary with <br> tags
+    $buildSummary = "CPU: $cpuBrand $cpuCategory $cpuModel<br>" .
+                    "GPU: $gpuBrand $gpuCategory $gpuModel<br>" .
+                    "RAM: $ramBrand $ramCategory $ramModel<br>" .
+                    "Primary Storage: $primaryStorageBrand $primaryStorageCategory $primaryStorageModel<br>" .
+                    "Secondary Storage: $secondaryStorageBrand $secondaryStorageCategory $secondaryStorageModel";
+
+    // Begin transaction
+    $conn->begin_transaction();
+
+    try {
+        // Step 1: Insert into user_hardware table
+        $sqlHardware = "INSERT INTO user_hardware (cpu_brand, cpu_category, cpu_model, gpu_brand, gpu_category, gpu_model, 
+                        ram_brand, ram_category, ram_model, primary_storage_brand, primary_storage_category, primary_storage_model, 
+                        secondary_storage_brand, secondary_storage_category, secondary_storage_model, user_name) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        $stmtHardware = $conn->prepare($sqlHardware);
+        $stmtHardware->bind_param("ssssssssssssssss", 
+                                  $cpuBrand, $cpuCategory, $cpuModel, 
+                                  $gpuBrand, $gpuCategory, $gpuModel,
+                                  $ramBrand, $ramCategory, $ramModel, 
+                                  $primaryStorageBrand, $primaryStorageCategory, $primaryStorageModel, 
+                                  $secondaryStorageBrand, $secondaryStorageCategory, $secondaryStorageModel, 
+                                  $userName);
         
-        // Execute the query
-        if ($stmt->execute()) {
-            header("Location: index.php");        
-        } else {
-            echo "Error saving build: " . $stmt->error;
+        if (!$stmtHardware->execute()) {
+            throw new Exception("Error saving build to user_hardware: " . $stmtHardware->error);
         }
 
-        // Close the statement
-        $stmt->close();
-    } else {
-        echo "Error preparing the query: " . $conn->error;
+        // Step 2: Fetch the user_id for the current user
+        $stmtUser = $conn->prepare("SELECT id FROM users WHERE name = ?");
+        $stmtUser->bind_param("s", $userName);
+        $stmtUser->execute();
+        $resultUser = $stmtUser->get_result();
+        $user = $resultUser->fetch_assoc();
+        $userId = $user['id'];
+        
+        if (!$userId) {
+            throw new Exception("User ID not found for user_name: $userName");
+        }
+
+        // Step 3: Insert into orders table
+        $sqlOrder = "INSERT INTO orders (user_id, build_summary, total_price, status) VALUES (?, ?, ?, 'pending')";
+        $stmtOrder = $conn->prepare($sqlOrder);
+        $stmtOrder->bind_param("isd", $userId, $buildSummary, $totalPrice);
+
+        if (!$stmtOrder->execute()) {
+            throw new Exception("Error saving order to orders: " . $stmtOrder->error);
+        }
+
+        // Commit transaction if both inserts are successful
+        $conn->commit();
+        echo "Your build has been saved successfully in both user_hardware and orders tables!";
+
+        // Close statements
+        $stmtHardware->close();
+        $stmtUser->close();
+        $stmtOrder->close();
+        
+    } catch (Exception $e) {
+        // Rollback transaction on error
+        $conn->rollback();
+        echo $e->getMessage();
     }
 
     // Close the connection
