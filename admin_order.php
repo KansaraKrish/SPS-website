@@ -50,19 +50,24 @@ $orders = $result->fetch_all(MYSQLI_ASSOC);
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($orders as $order): ?>
-        <tr>
-            <td><?php echo htmlspecialchars($order['order_id']); ?></td>
-            <td><?php echo htmlspecialchars($order['user_name']); ?></td>
-            <td><?php echo htmlspecialchars($order['email']); ?></td>
-            <td><?php echo htmlspecialchars($order['build_summary']); ?></td>
-            <td><?php echo htmlspecialchars($order['total_price']); ?></td>
-            <td class="status-<?php echo htmlspecialchars($order['status']); ?>">
-                <?php echo ucfirst(htmlspecialchars($order['status'])); ?>
-            </td>
-        </tr>
-        <?php endforeach; ?>
-    </tbody>
+    <?php foreach ($orders as $order): ?>
+    <tr>
+        <td><?php echo htmlspecialchars($order['order_id']); ?></td>
+        <td><?php echo htmlspecialchars($order['user_name']); ?></td>
+        <td><?php echo htmlspecialchars($order['email']); ?></td>
+        <td><?php echo htmlspecialchars($order['build_summary']); ?></td>
+        <td><?php echo htmlspecialchars($order['total_price']); ?></td>
+        <td>
+            <select class="status-dropdown" data-order-id="<?php echo $order['order_id']; ?>">
+                <option value="approve" <?php echo $order['status'] === 'approve' ? 'selected' : ''; ?>>Approve</option>
+                <option value="under_process" <?php echo $order['status'] === 'under_process' ? 'selected' : ''; ?>>Under Process</option>
+                <option value="ready_to_deliver" <?php echo $order['status'] === 'ready_to_deliver' ? 'selected' : ''; ?>>Ready to Deliver</option>
+            </select>
+            <button class="update-btn" data-order-id="<?php echo $order['order_id']; ?>">Update</button>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</tbody>
 </table>
 </body>
 </html>

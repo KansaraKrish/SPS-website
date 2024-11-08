@@ -25,7 +25,6 @@
             </div>
         </nav>
     </header>
-
     <section class="orders-section">
         <h1>My Orders</h1>
         <?php
