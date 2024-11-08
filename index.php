@@ -226,7 +226,7 @@
                     <p>Corsair Vengeance LPX 16GB DDR4 3200MHz</p>
                     <p>Samsung 970 EVO Plus 1TB SSD</p>
                     <p>Western Digital Blue 1TB HDD</p>
-                    <a href="product.php" class="btn">Add This</a>
+                    <!-- <a href="product.php" class="btn">Add This</a> -->
                 </div>
                 <div class="product-image">
                     <img src="images/intelfinal.webp" alt="Intel PC" width="400" height="300">
@@ -241,7 +241,7 @@
                 <p>G.Skill Trident Z RGB 32GB DDR4 3600MHz</p>
                 <p>Samsung 970 EVO Plus 1TB SSD</p>
                 <p>Western Digital Black 2TB HDD</p>
-                <a href="product.php" class="btn">Add This</a>
+                <!-- <a href="product.php" class="btn">Add This</a> -->
             </div>
             <div class="product-image">
                 <img src="images/amdfinal.jpeg" alt="AMD PC" width="400" height="300">
@@ -259,7 +259,7 @@
                 <p>G.Skill Ripjaws V 16GB DDR4 3200MHz</p>
                 <p>Samsung 980 Pro 2TB SSD</p>
                 <p>Western Digital Blue 1TB HDD</p>
-                <a href="product.php" class="btn">Add This</a>
+                <!-- <a href="product.php" class="btn">Add This</a> -->
             </div>
             <div class="product-image">
                 <img src="images/intelnew.webp" alt="Intel PC" width="400" height="300">
@@ -273,7 +273,7 @@
                 <p>Corsair Vengeance RGB Pro 32GB DDR4 3600MHz</p>
                 <p>Samsung 980 Pro 2TB SSD</p>
                 <p>Western Digital Black 2TB HDD</p>
-                <a href="product.php" class="btn">Add This</a>
+                <!-- <a href="product.php" class="btn">Add This</a> -->
             </div>
             <div class="product-image">
                 <img src="images/amd.jpg" alt="AMD PC" width="400" height="300">
