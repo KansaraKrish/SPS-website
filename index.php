@@ -17,7 +17,6 @@
     color: #ffffff;
     margin-top: 20px;
 }
-
 .banner-content {
     max-width: 50%;
 }
@@ -229,7 +228,7 @@
                 <a href="product.php" class="btn">Add This</a>
             </div>
             <div class="product-image">
-                <img src="images/intel.jpg" alt="Intel PC" width="400" height="300">
+                <img src="images/intelfinal.webp" alt="Intel PC" width="400" height="300">
             </div>
         </div>
 
@@ -243,7 +242,7 @@
                 <a href="product.php" class="btn">Add This</a>
             </div>
             <div class="product-image">
-                <img src="images/AMD.jpeg" alt="AMD PC" width="400" height="300">
+                <img src="images/amdfinal.jpeg" alt="AMD PC" width="400" height="300">
             </div>
         </div>
     </div>
