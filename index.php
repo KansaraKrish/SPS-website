@@ -26,6 +26,7 @@
     font-weight: bold;
     margin-bottom: 20px;
     color: white;
+   
 }
 
 .banner-content p {
@@ -170,7 +171,9 @@
     <div class="banner-content">
         <h1>Build Your Custom Desktop</h1>
         <p>Create the ultimate PC setup tailored to your needs. Choose the components you want and see your dream build come to life.</p>
-        <button class="customize-button">Customize Your PC</button>
+        <a href="product.php">
+         <button class="customize-button">Customize Your PC</button>
+</a>
     </div>
     <div class="banner-image">
         <img src="images/home pc.webp" alt="Custom Gaming PC">
@@ -214,28 +217,30 @@
     </table> -->
 
 
-    <div class="product-container">
-        <div class="product-card">
-            <div class="product-details">
-                <h2>Configuration 1</h2>
-                <p>CPU: Intel i9</p>
-                <p>GPU: NVIDIA RTX 3080</p>
-                <p>RAM: 16GB</p>
-                <p>Storage: 1TB SSD</p>
-                <a href="product.php" class="btn">Add This</a>
+        <div class="product-container">
+            <div class="product-card">
+                <div class="product-details">
+                    <h2>Configuration 1</h2>
+                    <p>Intel Core i9-12900K</p>
+                    <p>NVIDIA GeForce RTX 4060</p>
+                    <p>Corsair Vengeance LPX 16GB DDR4 3200MHz</p>
+                    <p>Samsung 970 EVO Plus 1TB SSD</p>
+                    <p>Western Digital Blue 1TB HDD</p>
+                    <a href="product.php" class="btn">Add This</a>
+                </div>
+                <div class="product-image">
+                    <img src="images/intelfinal.webp" alt="Intel PC" width="400" height="300">
+                </div>
             </div>
-            <div class="product-image">
-                <img src="images/intelfinal.webp" alt="Intel PC" width="400" height="300">
-            </div>
-        </div>
 
         <div class="product-card">
             <div class="product-details">
                 <h2>Configuration 2</h2>
-                <p>CPU: AMD R9</p>
-                <p>GPU: NVIDIA RTX 3080</p>
-                <p>RAM: 16GB</p>
-                <p>Storage: 2TB SSD</p>
+                <p>AMD Ryzen 7 5800X</p>
+                <p>AMD Radeon RX 6900 XT</p>
+                <p>G.Skill Trident Z RGB 32GB DDR4 3600MHz</p>
+                <p>Samsung 970 EVO Plus 1TB SSD</p>
+                <p>Western Digital Black 2TB HDD</p>
                 <a href="product.php" class="btn">Add This</a>
             </div>
             <div class="product-image">
@@ -249,10 +254,11 @@
         <div class="product-card">
             <div class="product-details">
                 <h2>Configuration 3 </h2>
-                <p>CPU: Intel i9</p>
-                <p>GPU: NVIDIA RTX 3080</p>
-                <p>RAM: 16GB</p>
-                <p>Storage: 2TB SSD</p>
+                <p>Intel Core i5-10400</p>
+                <p>NVIDIA GeForce RTX 3060</p>
+                <p>G.Skill Ripjaws V 16GB DDR4 3200MHz</p>
+                <p>Samsung 980 Pro 2TB SSD</p>
+                <p>Western Digital Blue 1TB HDD</p>
                 <a href="product.php" class="btn">Add This</a>
             </div>
             <div class="product-image">
@@ -262,10 +268,11 @@
     <div class="product-card">
             <div class="product-details">
                 <h2>Configuration 4</h2>
-                <p>CPU: AMD R9</p>
-                <p>GPU: NVIDIA RTX 3080</p>
-                <p>RAM: 16GB</p>
-                <p>Storage: 2TB SSD</p>
+                <p>AMD Ryzen 5 3600</p>
+                <p>AMD Radeon RX 6600 XT</p>
+                <p>Corsair Vengeance RGB Pro 32GB DDR4 3600MHz</p>
+                <p>Samsung 980 Pro 2TB SSD</p>
+                <p>Western Digital Black 2TB HDD</p>
                 <a href="product.php" class="btn">Add This</a>
             </div>
             <div class="product-image">
