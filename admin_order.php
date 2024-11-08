@@ -67,7 +67,37 @@ $orders = $result->fetch_all(MYSQLI_ASSOC);
         </td>
     </tr>
     <?php endforeach; ?>
-</tbody>
+    </tbody>
 </table>
+
+<script>
+document.querySelectorAll('.update-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const orderId = button.getAttribute('data-order-id');
+        const status = document.querySelector(`.status-dropdown[data-order-id='${orderId}']`).value;
+
+        fetch('update_order_status.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ order_id: orderId, status: status })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Order status updated successfully.');
+            } else {
+                alert('Error updating order status: ' + (data.error || 'Unknown error.'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error updating order status.');
+        });
+    });
+});
+</script>
+
 </body>
 </html>
