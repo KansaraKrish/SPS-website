@@ -142,13 +142,10 @@
                <div class="logo">
                <a href="index.php"><img src="images/11.jpeg" alt="Build My Rig Logo" class="logo"></a>
             </div>
-            
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="product.php">Customize</a></li>
 
-        
-                  
                 </ul>
 
                  <!-- Login Button or Username Placeholder -->
