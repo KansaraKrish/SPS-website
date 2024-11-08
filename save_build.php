@@ -60,10 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $secondaryStorageDetails = getComponentName($conn, 'storage', $secondaryStorageBrandId, $secondaryStorageCategoryId, $secondaryStorageModelId);
 
     // Create build summary with actual names
-    $buildSummary = "CPU: $cpuDetails<br>" .
-                    "GPU: $gpuDetails<br>" .
-                    "RAM: $ramDetails<br>" .
-                    "Primary Storage: $primaryStorageDetails<br>" .
+    $buildSummary = "CPU: $cpuDetails ," .
+                    "GPU: $gpuDetails ," .
+                    "RAM: $ramDetails ," .
+                    "Primary Storage: $primaryStorageDetails ," .
                     "Secondary Storage: $secondaryStorageDetails";
 
     // Begin transaction
@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         // Step 3: Insert into orders table
-        $sqlOrder = "INSERT INTO orders (user_id, build_summary, total_price, status) VALUES (?, ?, ?, 'pending')";
+        $sqlOrder = "INSERT INTO orders (user_id, build_summary, total_price, status) VALUES (?, ?, ?, 'pending for aproval')";
         $stmtOrder = $conn->prepare($sqlOrder);
         $stmtOrder->bind_param("isd", $userId, $buildSummary, $totalPrice);
 
@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $conn->rollback();
         echo $e->getMessage();
     }
-
+    header("Location: index.php");
     // Close the connection
     $conn->close();
 }

@@ -110,7 +110,7 @@
                                 <p><strong>RAM:</strong> ' . htmlspecialchars($order['ram_details']) . '</p>
                                 <p><strong>Primary Storage:</strong> ' . htmlspecialchars($order['primary_storage']) . '</p>
                                 <p><strong>Secondary Storage:</strong> ' . htmlspecialchars($order['secondary_storage']) . '</p>
-                                <p><strong>Total Price:</strong> $' . htmlspecialchars($order['build_price']) . '</p>
+                                <p><strong>Total Price:</strong> Rs ' . htmlspecialchars($order['build_price']) . '</p>
                                 <p><strong>Status:</strong> ' . htmlspecialchars($order['order_status']) . '</p>
                             </div>
                             <div class="order-image">

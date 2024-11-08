@@ -45,8 +45,9 @@ $orders = $result->fetch_all(MYSQLI_ASSOC);
             <th>User Name</th>
             <th>Email</th>
             <th>Build Summary</th>
-            <th>Total Price ($)</th>
+            <th>Total Price (Rs)</th>
             <th>Status</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -56,13 +57,18 @@ $orders = $result->fetch_all(MYSQLI_ASSOC);
         <td><?php echo htmlspecialchars($order['user_name']); ?></td>
         <td><?php echo htmlspecialchars($order['email']); ?></td>
         <td><?php echo htmlspecialchars($order['build_summary']); ?></td>
-        <td><?php echo htmlspecialchars($order['total_price']); ?></td>
+        <td>
+            <input type="number" step="0.01" class="price-input" data-order-id="<?php echo $order['order_id']; ?>"
+                   value="<?php echo htmlspecialchars($order['total_price']); ?>" />
+        </td>
         <td>
             <select class="status-dropdown" data-order-id="<?php echo $order['order_id']; ?>">
                 <option value="approve" <?php echo $order['status'] === 'approve' ? 'selected' : ''; ?>>Approve</option>
                 <option value="under_process" <?php echo $order['status'] === 'under_process' ? 'selected' : ''; ?>>Under Process</option>
                 <option value="ready_to_deliver" <?php echo $order['status'] === 'ready_to_deliver' ? 'selected' : ''; ?>>Ready to Deliver</option>
             </select>
+        </td>
+        <td>
             <button class="update-btn" data-order-id="<?php echo $order['order_id']; ?>">Update</button>
         </td>
     </tr>
@@ -75,25 +81,26 @@ document.querySelectorAll('.update-btn').forEach(button => {
     button.addEventListener('click', () => {
         const orderId = button.getAttribute('data-order-id');
         const status = document.querySelector(`.status-dropdown[data-order-id='${orderId}']`).value;
+        const newPrice = document.querySelector(`.price-input[data-order-id='${orderId}']`).value;
 
         fetch('update_order_status.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ order_id: orderId, status: status })
+            body: JSON.stringify({ order_id: orderId, status: status, new_price: newPrice })
         })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                alert('Order status updated successfully.');
+                alert('Order status and price updated successfully.');
             } else {
-                alert('Error updating order status: ' + (data.error || 'Unknown error.'));
+                alert('Error updating order: ' + (data.error || 'Unknown error.'));
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Error updating order status.');
+            alert('Error updating order.');
         });
     });
 });
