@@ -155,13 +155,17 @@
             session_start();
             if (isset($_SESSION['user_name'])): ?>
                 <span>Welcome, <?= $_SESSION['user_name'] ?></span>
+                <a href="logout.php" class="login-btn" style="background-color: #008080; color: white;padding: 10px 15px; border-radius: 5px; text-decoration: none;
+    transition: background-color 0.3s ease;">Logout</a>
             <?php else: ?>
                 <a href="login.php" class="login-btn" style="background-color: #008080; color: white;padding: 10px 15px; border-radius: 5px; text-decoration: none;
     transition: background-color 0.3s ease;">Login</a>
             <?php endif; ?>
         </div>
-
+        
+      
         <a href="my_orders.php"><img src="images/shopping-cart1.png" alt="Cart" class="cart-icon"></a>
+        
             </nav>
         </header>  
 
